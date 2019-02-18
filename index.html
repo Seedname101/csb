@@ -117,7 +117,7 @@ var mouseIsInsideRect = function(x, y, w, h) {
 };
 
 //pens & erase
-mouseDragged = function(){
+mouseClicked = function(){
     
 if (mouseIsPressed && mouseButton === LEFT) {
 saves.push([mouseX, mouseY, penw, color(fillr1, fillg1, fillb1)]);
