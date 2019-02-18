@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+<html> 
+ <head>
+    <title>Template for Websites</title> 
+</head>
+ <body>
+    <p align="center"> 
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(60);
+  //Last updated: Monday, Nov. 19th, 11:40 PM (EST) v.3.0!
+/**CREDITS: Ryan, Larry Serflaten, Bob Lyon, Ian*/
+/**TO SAVE THE BACKGROUND, DRAG OVER THE BUTTON.*/
+
+/**Copy and paste println over the brackets. Click the button to access println*/
+
+/**Make sure this is true before pasting*/
+var savesTrue = true;
+/**Paste before creating the spinoff*/
+
+/**Paste information OVER the brackets. Not over the saves and not in the brackets. Keep the semicolon.*/
+
+/**If you already saved and are adding something, paste the new save underneath the other one, but still inside of the brackets. Then, you have to delete the brackets that the new save had.**/
+
+/**You can also copy and paste this saves function into your own code. Make sure you also copy and paste the first for loop and the variables that are saved. It will draw the picture that you made.*/
+//Saves (Close To Hide Numbers){
+var saves = [];
+
+
+
+//}
+
+/**I will be updating the instructions soon.*/
+
+//Program {
+var timeThingymaBobber = -100;
+//Make this higher to make the rainbow go by faster. Lower = slower.
+var timeAdded = 15;
+//-------------
+var penw = 5;
+var penh = 5;
+//-------------
+var fillr1 = 0;
+var fillg1 = 0;
+var fillb1 = 0;
+//-------------
+var fillrBig = 255;
+var fillgBig = 255;
+var fillbBig = 255;
+//-------------
+var fillrSmall = 255;
+var fillgSmall = 255;
+var fillbSmall = 255;
+//-------------
+var questionx = 10000;
+var questiony = 10000;
+//-------------
+var texttestx = 10000;
+//-------------
+var instructionsfillr = 255;
+var instructionsfillg = 255;
+var instructionsfillb = 255; 
+//-------------
+var resetfillr = 255;
+var resetfillg = 255;
+var resetfillb = 255;
+//-------------
+var backfillr = 255;
+var backfillg = 255;
+var backfillb = 255;
+//-------------
+var backtextr = 0;
+var backtextg = 0;
+var backtextb = 0;
+//-------------
+var penhighlight = 600;
+//-------------
+var plusstroker = 0;
+var plusstrokeg = 0;
+var plusstrokeb = 0;
+//-------------
+var backstroke = 100000;
+//-------------
+var minusboxr = 255;
+var minusboxg = 255;
+var minusboxb = 255;
+var plusboxr = 255;
+var plusboxg = 255;
+var plusboxb = 255;
+//-------------
+var saveboxr = 255;
+var saveboxg = 255;
+var saveboxb = 255;
+//-------------
+var eraserr = 255;
+var eraserg = 255;
+var eraserb = 255;
+//-------------
+var white = (255, 255, 255);
+var black = (0, 0, 0);
+//-------------
+var inputMode = 'none';
+var userInput = '';
+
+var mouseIsInsideRect = function(x, y, w, h) {
+    return mouseX >= x && mouseX <= x + w &&
+           mouseY >= y && mouseY <= y + h;
+};
+
+//pens & erase
+mouseDragged = function(){
+    
+if (mouseIsPressed && mouseButton === LEFT) {
+saves.push([mouseX, mouseY, penw, color(fillr1, fillg1, fillb1)]);
+    noStroke();
+    fill(fillr1, fillg1, fillb1);
+    ellipse(mouseX, mouseY, penw, penh);
+    cursor(CROSS);
+    } else if (mouseIsPressed && mouseButton === RIGHT) {
+        noStroke();
+        fill(eraserr, eraserg, eraserb);
+        ellipse(mouseX, mouseY, 15, 15);
+saves.push([mouseX, mouseY, 15, color(255, 255, 255)]);
+cursor(CROSS);
+    } else {
+        fill(255, 255, 255);
+    }
+};
+//----------------
+draw= function() {
+    noStroke();
+        if(savesTrue){
+    for(var i = 0; i < saves.length; i ++){
+        fill(saves[i][3]);
+        ellipse(saves[i][0], saves[i][1], saves[i][2], saves[i][2]);
+    }
+    savesTrue = false;
+    }
+    //---------------
+    textSize(12);
+    stroke(0, 0, 0);
+    //reset
+    fill(resetfillr, resetfillg, resetfillb);
+    rect(0, 1, 73, 22);
+    fill(0, 0, 0);
+    text("Click to reset",1, 16);
+    //instructions
+    fill(instructionsfillr, instructionsfillg, instructionsfillb);
+    rect(77, 1, 112, 22);
+    fill(0, 0, 0);
+    text("Click for instructions", 78, 16);
+    //smaller pen thing
+    fill(fillrBig, fillgBig, fillbBig);
+    rect(193, 1, 89, 22);
+    fill(0, 0, 0);
+    text("Shrink Pen Size", 194, 16);
+    //bigger pen thing
+    fill(fillrSmall, fillgSmall, fillbSmall);
+    rect(287, 1, 102, 22);
+    fill(0, 0, 0);
+    text("Enlarge Pen Size", 292, 16);
+    //-------------
+    fill(255, 255, 255);
+    rect(0, 375, 36, 22);
+    fill(0, 0, 0);
+    text("Colors", 0, 391);
+    //COLORS
+    //Red
+    fill(255, 0, 0);
+    rect(85, 375, 40, 22);
+    fill(0, 0, 0);
+    text("Red", 94, 391);
+    //Orange
+    fill(255, 165, 0);
+    rect(129, 375, 40, 22);
+    fill(0, 0, 0);
+    text("Orange", 129, 391);
+    //Yellow
+    fill(255, 255, 0);
+    rect(173, 375, 40, 22);
+    fill(0, 0, 0);
+    text("Yellow", 175, 391);
+    //Green
+    fill(0, 255, 0);
+    rect(217, 375, 40, 22);
+    fill(0, 0, 0);
+    text("Green", 219, 391);
+    //Blue
+    fill(0, 0, 255);
+    rect(261, 375, 40, 22);
+    fill(255, 255, 255);
+    text("Blue", 268, 391);
+    //Purple
+    fill(128, 0, 128);
+    rect(305, 375, 40, 22);
+    fill(255, 255, 255);
+    text("Purple", 306, 391);
+    //Black
+    stroke(plusstroker, plusstrokeg, plusstrokeb);
+    fill(0, 0, 0);
+    rect(349, 375, 40, 22);
+    fill(255, 255, 255);
+    text("Black", 352, 391);
+    //White
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
+    rect(40, 375, 40, 22);
+    fill(0, 0, 0);
+    text("White", 44, 391);
+    stroke(255, 0, 0);
+    fill(255, 0, 0);
+    rect(0, 351, 10, 22);
+    stroke(255, 165, 0);
+    fill(255, 165, 0);
+    rect(10, 351, 10, 22);
+    stroke(255, 255, 0);
+    fill(255, 255, 0);
+    rect(20, 351, 10, 22);
+    stroke(0, 255, 0);
+    fill(0, 255, 0);
+    rect(30, 351, 10, 22);
+    stroke(0, 213, 255);
+    fill(0, 213, 255);
+    rect(40, 351, 10, 22);
+    fill(0, 0, 0);
+    stroke(0, 0, 0);
+    text("Random!", 0, 367);
+    //color chose indicator.
+    fill(fillr1, fillg1, fillb1);
+    rect(57, 351, 21, 22);
+    //question mark thing
+    fill(255, 255, 255);
+    text("?", questionx, questiony);
+    //Darker Lighter
+    //minus (Lighter)
+    fill(minusboxr, minusboxg, minusboxb);
+    rect(334, 351, 20, 20);
+    fill(0, 0, 0);
+    rect(337, 360, 13, 4);
+    //plus (Darker)
+    stroke(plusstroker, plusstrokeg, plusstrokeb);
+    fill(0, 0, 0);
+    rect(368, 351, 20, 20);
+    fill(plusboxr, plusboxg, plusboxb);
+    noStroke();
+    rect(370, 360, 15, 4);
+    rect(376, 355, 4, 15);
+    //background color!!
+    stroke(0, 0, 0);
+    fill(backfillr, backfillg, backfillb);
+    rect(0, 30, 133, 22);
+    fill(backtextr, backtextg, backtextb);
+    text("Set as background color", 2, 44);
+    //pen size previewer
+    fill(255, 255, 255);
+    rect(216, 351, 108, 22);
+    fill(0, 0, 0);
+    text("Pen Size:" + " " + penw, 235, 368);
+    //rgb previewer
+    fill(255, 255, 255);
+    rect(84, 351, 128, 22);
+    fill(0, 0, 0);
+    text("rgb(" + round(fillr1) + "," + round(fillg1) + "," + round(fillb1) + ")", 100, 367);
+    //pen highlight
+    ellipse(10000, penhighlight, 20, 20);
+    //savestrue
+    fill(saveboxr, saveboxg, saveboxb);
+    rect(137, 30, 79, 22);
+    fill(0, 0, 0);
+    text("Click to Save", 138, 44);
+    //if statements for button color changes
+    if(mouseX >= 77 && mouseX <= 189 &&
+   mouseY >= 1 && mouseY <= 23){
+       instructionsfillr = 135;
+       instructionsfillg = 206;
+       instructionsfillb = 250;
+        cursor(HAND);
+   } else if(mouseX && mouseY !== (mouseX >= 77 && mouseX <= 189 &&
+   mouseY >= 1 && mouseY <= 23)){
+       instructionsfillr = 255;
+       instructionsfillg = 255;
+       instructionsfillb = 255;
+   } 
+   if(mouseX >= 0 && mouseX <= 73 &&
+      mouseY >= 1 && mouseY <= 23){
+       resetfillr = 135;
+       resetfillg = 206;
+       resetfillb = 250;
+       cursor(HAND);
+   } else if(mouseX && mouseY !== (mouseX >= 0 && mouseX <= 73 &&
+      mouseY >= 1 && mouseY <= 23)){
+        resetfillr = 255;
+        resetfillg = 255;
+        resetfillb = 255;
+        cursor(ARROW);
+      }
+    if(mouseX >= 193 && mouseX <= 282 &&
+   mouseY >= 1 && mouseY <= 23){
+       fillrBig = 135;
+       fillgBig = 206;
+       fillbBig = 250;
+       cursor(HAND);
+   } else if(mouseX && mouseY !== (mouseX >= 193 && mouseX <= 282 &&
+   mouseY >= 1 && mouseY <= 23)){
+       fillrBig = 255;
+       fillgBig = 255;
+       fillbBig = 255;
+   }
+   if(mouseX >= 287 && mouseX <= 389 &&
+   mouseY >= 1 && mouseY <= 23){
+      fillrSmall = 135;
+      fillgSmall = 206;
+      fillbSmall = 250;
+      cursor(HAND);
+   } else if(mouseX && mouseY !==(mouseX >= 287 && mouseX <= 389 &&
+   mouseY >= 1 && mouseY <= 23)){
+       fillrSmall = 255;
+       fillgSmall = 255;
+       fillbSmall = 255;
+   }
+   if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 55){
+      backfillr = fillr1;
+      backfillg = fillg1;
+      backfillb = fillb1;
+      cursor(HAND);
+   } else if(mouseX && mouseY !== (mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 55)){
+       backfillr = 255;
+       backfillg = 255;
+       backfillb = 255;
+   } 
+   if((fillr1 === 0 && fillg1 === 0) &&(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 55)){
+       backtextr = 255;
+       backtextg = 255;
+       backtextb = 255;
+   } else if (fillr1 === 0 && (mouseX && mouseY !== (mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 55))){
+       backtextr = 0;
+       backtextg = 0;
+       backtextb = 0;
+   }
+   if(penhighlight >= 0){
+       penhighlight += 3;
+   }
+   if(penhighlight <= 400){
+       fillrSmall = 255;
+       fillgSmall = 223;
+       fillbSmall = 0;
+       fillrBig = 255;
+       fillgBig = 223;
+       fillbBig = 0;
+   } else if(penhighlight >= 400){
+      penhighlight = 500;
+   }
+   if(backstroke === 0){
+       backstroke += 0.0000001;
+   } 
+   if(backstroke < 10000000){
+       plusstroker = 255;
+       plusstrokeg = 255;
+       plusstrokeb = 255;
+   }
+   if(mouseX >= 334 && mouseX <= 354 &&
+        mouseY >= 351 && mouseY <= 371){
+            minusboxr = 135;
+            minusboxg = 206;
+            minusboxb = 250;
+            cursor(HAND);
+        } else if (mouseX && mouseY !== (mouseX >= 334 && mouseX <= 354 &&
+        mouseY >= 351 && mouseY <= 371)) {
+            minusboxr = 255;
+            minusboxg = 255;
+            minusboxb = 255;
+        }
+    if(mouseX >= 368 && mouseX <= 388 &&
+        mouseY >= 351 && mouseY <= 371){
+            plusboxr = 135; 
+            plusboxg = 206;
+            plusboxb = 250;
+            cursor(HAND);
+        } else if(mouseY && mouseX !==(mouseX >= 368 && mouseX <= 388 &&
+        mouseY >= 351 && mouseY <= 371)){
+            plusboxr = 255; 
+            plusboxg = 255;
+            plusboxb = 255;
+        }
+        if(mouseX >= 137 && mouseX <= 216 &&
+   mouseY >= 30 && mouseY <= 52){
+       saveboxr = 135;
+       saveboxg = 206;
+       saveboxb = 250;
+       cursor(HAND);
+   } else if(mouseX && mouseY !==(mouseX >= 137 && mouseX <= 216 &&
+   mouseY >= 30 && mouseY <= 52)){
+       saveboxr = 255;
+       saveboxg = 255;
+       saveboxb = 255;
+   }
+   if(timeThingymaBobber > 0){
+        fillr1 = 255;
+        fillg1 = 0;
+        fillb1 = 0;
+    }
+    if((timeThingymaBobber > 100)&& fillr1 === 255 && fillg1 === 0){
+        fillr1 = 255;
+        fillg1 = 165;
+        fillb1 = 0;
+    }
+    if((timeThingymaBobber > 200)&& fillr1 === 255 && fillg1 === 165){
+        fillr1 = 255;
+        fillg1 = 255;
+        fillb1 = 0;
+    }
+    if((timeThingymaBobber > 300)&& fillr1 === 255 && fillg1 === 255){
+        fillr1 = 0;
+        fillg1 = 255;
+        fillb1 = 0;
+    }
+    if((timeThingymaBobber > 400)&& fillr1 === 0 && fillg1 === 255){
+        fillr1 = 0;
+        fillg1 = 0;
+        fillb1 = 255;
+    }
+    if((timeThingymaBobber > 500)&& fillr1 === 0 && fillg1 === 0 && fillb1 === 255){
+        fillr1 = 128;
+        fillg1 = 0;
+        fillb1 = 128;
+    }
+    if((600 < timeThingymaBobber)&& fillr1 === 128 && fillg1 === 0 && fillb1 === 128){
+        timeThingymaBobber = 1;
+    }
+    if(timeThingymaBobber > 0){
+    timeThingymaBobber += timeAdded;
+    }
+    if(mouseX >= 84 && mouseX <= 212 &&
+        mouseY >= 351 && mouseY <= 373){
+            cursor(TEXT);
+        }
+}; 
+//reset
+mouseClicked = function(){
+if(mouseX >= 0 && mouseX <= 73 &&
+      mouseY >= 1 && mouseY <= 23){
+          Program.restart();
+      } else if(mouseX >= 334 && mouseX <= 354 &&
+        mouseY >= 351 && mouseY <= 371){
+    fillr1 += 15;
+    fillb1 += 15;
+    fillg1 += 15;
+   } else if(mouseX >= 368 && mouseX <= 388 &&
+        mouseY >= 351 && mouseY <= 371){
+            fillr1 -= 15;
+            fillg1 -= 15;
+            fillb1 -= 15;
+        } 
+    if(inputMode === 'none' && mouseIsInsideRect(84, 351, 128, 22) ) {
+        //Make sure userInput is empty and change inputMode to red
+        userInput = '';
+        inputMode = 'enter red';
+    }
+};
+//instructions & colors & pen size
+mousePressed = function(){
+if(mouseX >= 77 && mouseX <= 189 &&
+   mouseY >= 1 && mouseY <= 23){
+       texttestx = 76;
+       fill(0, 0, 0);
+       text("Left click and drag for the small pen. \nRight click and drag to erase. You \ncan enlarge and decrese the size \nof the pens using the buttons. Also, you can\nclick the 'Click to Reset' button to reset \nthe program. You can select a color from below. \nClick the 'random' button to get a random \ncolor. The random color does not stay \nthe same throughout the program. \nThe color previewer is next to the random button.\nThere are buttons that make the color \ndarker and lighter (+/-). To set something \nas a background color, select the color and drag \nthe mouse on the button. Click the save button to access \nprintln for saves. To add a custom rgb, click on the rgb \nbuttons and input your own numbers. Click enter \nin between each of the three values. \nRead the code for better instructions. \nClick to exit the instructions.", texttestx, 70);
+    } else if(mouseIsPressed && texttestx === 76){
+        background(255, 255, 255);
+        texttestx = 10000;
+    } else if(mouseX >= 85 && mouseX <= 125 &&
+   mouseY >= 375 && mouseY <= 397){
+       fillr1 = 255;
+       fillg1 = 0;
+       fillb1 = 0;
+       timeThingymaBobber = -100;
+   } else if(mouseX >= 89 && mouseX <= 169 &&
+   mouseY >= 375 && mouseY <= 397){
+      fillr1 = 255;
+      fillg1 = 165;
+      fillb1 = 0;
+      timeThingymaBobber = -100;
+   } else if(mouseX >= 173 && mouseX <= 213 &&
+   mouseY >= 375 && mouseY <= 397){
+      fillr1 = 255;
+      fillg1 = 255;
+      fillb1 = 0;
+      timeThingymaBobber = -100;
+   } else if(mouseX >= 217 && mouseX <= 253 &&
+   mouseY >= 375 && mouseY <= 397){
+       fillr1 = 0;
+       fillg1 = 255;
+       fillb1 = 0;
+       timeThingymaBobber = -100;
+   } else if(mouseX >= 261 && mouseX <= 301 &&
+   mouseY >= 375 && mouseY <= 397){
+      fillr1 = 0;
+      fillg1 = 0;
+      fillb1 = 255;
+      timeThingymaBobber = -100;
+   } else if(mouseX >= 305 && mouseX <= 345 &&
+   mouseY >= 375 && mouseY <= 397){
+       fillr1 = 128;
+       fillg1 = 0;
+       fillb1 = 128;
+       timeThingymaBobber = -100;
+   } else if(mouseX >= 349 && mouseX <= 389 &&
+   mouseY >= 375 && mouseY <= 397){
+       fillr1 = 0;
+       fillg1 = 0;
+       fillb1 = 0;
+       timeThingymaBobber = -100;
+   }  else if(mouseX >= 193 && mouseX <= 282 &&
+   mouseY >= 1 && mouseY <= 23){
+    penw -= 0.5;
+    penh -= 0.5;
+       fillrBig = 211;
+       fillgBig = 211;
+       fillbBig = 211;
+       fillrSmall = 255;
+       fillgSmall = 255;
+       fillbSmall = 255;
+} else if(mouseX >= 287 && mouseX <= 389 &&
+   mouseY >= 1 && mouseY <= 23){
+    penw += 0.5;
+    penh += 0.5;
+    fillrSmall = 211;
+    fillgSmall = 211;
+    fillbSmall = 211;
+    fillrBig = 255;
+    fillgBig = 255;
+    fillbBig = 255;
+} if (mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52){
+   penw = 10000;
+   penh = 10000;
+   } if (mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 0 && fillg1 === 0 && fillb1 === 0){
+       background(black);
+       eraserr = 0;
+       eraserg = 0;
+       eraserb = 0;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 255 && fillg1 === 255 && fillb1 === 255){
+       background(white);
+       eraserr = 255;
+       eraserg = 255;
+       eraserb = 255;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 255 && fillg1 === 0 && fillb1 === 0){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 255;
+       eraserg = 0;
+       eraserb = 0;
+   }  else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 255 && fillg1 === 165 && fillb1 === 0){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 255;
+       eraserg = 165;
+       eraserb = 0;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 255 && fillg1 === 255 && fillb1 === 0){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 255;
+       eraserg = 255;
+       eraserb = 0;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 0 && fillg1 === 255 && fillb1 === 0){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 0;
+       eraserg = 255;
+       eraserb = 0;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 0 && fillg1 === 0 && fillb1 === 255){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 0;
+       eraserg = 0;
+       eraserb = 255;
+   } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52 && fillr1 === 128 && fillg1 === 0 && fillb1 === 128){
+       background(fillr1, fillg1, fillb1);
+       eraserr = 128;
+       eraserg = 0;
+       eraserb = 128;
+    } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52){
+     background(fillr1, fillg1, fillb1);
+   } if (mouseX >= 40 && mouseX <= 80 &&
+   mouseY >= 375 && mouseY <= 397){
+       fillr1 = 255;
+       fillg1 = 255;
+       fillb1 = 255;
+       timeThingymaBobber = -100;
+   } else if(mouseX >= 216 && mouseX <= 324 &&
+   mouseY >= 351 && mouseY <= 373){
+       penhighlight = 0;
+       /**Saves Println*/
+   } else if(mouseX >= 137 && mouseX <= 216 &&
+   mouseY >= 30 && mouseY <= 52){
+var json = (function(w) { return this[w]; })("JSON");
+println(json.stringify(saves));
+   }
+};
+//Random
+mouseReleased = function(){
+if(mouseX >= 0 && mouseX <= 50 &&
+   mouseY >= 351 && mouseY <= 373){
+        timeThingymaBobber = 0.1;
+     questionx = 64;
+     questiony = 368;
+    } else if(mouseX >= 193 && mouseX <= 282 &&
+   mouseY >= 1 && mouseY <= 23){
+       fillrBig = 255;
+       fillgBig = 255;
+       fillbBig = 255;
+       fillrSmall = 255;
+       fillgSmall = 255;
+       fillbSmall = 255;
+   } else if(mouseX >= 287 && mouseX <= 389 &&
+   mouseY >= 1 && mouseY <= 23){
+       fillrBig = 255;
+       fillgBig = 255;
+       fillbBig = 255;
+       fillrSmall = 255;
+       fillgSmall = 255;
+       fillbSmall = 255;
+    } else if(mouseX >= 0 && mouseX <= 133 &&
+   mouseY >= 30 && mouseY <= 52){
+   penw = 5;
+   penh = 5;
+   cursor(HAND);
+   } else{
+     questionx = 10000;
+     questiony = 10000;
+   } 
+};
+keyReleased = function() {
+    //If an inputMode is active:
+    if(inputMode === 'enter red' || inputMode === 'enter green' || 
+       inputMode === 'enter blue') {
+        
+        //If the userInput has data and backspace is pressed:
+        if(userInput.length > 0 && keyCode === BACKSPACE) {
+            //Delete the last value added to userInput
+            userInput = userInput.substr(0, userInput.length - 1);
+        } 
+        
+        //If userInput is less than 3 numbers:
+        if(userInput.length < 3) {
+            //If a number key is pressed:
+            if(keyCode > 47 && keyCode < 58 || keyCode > 95 && keyCode < 106) {
+                //Add that number to the userInput string
+                userInput += String.fromCharCode(key);
+            }
+        }
+        
+        //If the enter key is pressed:
+        if(keyCode === ENTER) {
+            //If enter red mode is active:
+            if(inputMode === 'enter red') {
+                //Convert the userInput string to a number and set fillr1
+                fillr1 = Number(userInput);
+                //Reset userInput
+                userInput = '';
+                //Change inputMode to green
+                inputMode = 'enter green';
+            
+            //If enter green is active:
+            } else if(inputMode === 'enter green') {
+                fillg1 = Number(userInput);
+                userInput = '';
+                inputMode = 'enter blue';
+            
+            //If enter blue is active:  
+            } else if(inputMode === 'enter blue') {
+                fillb1 = Number(userInput);
+                userInput = '';
+                inputMode = 'none';
+            }
+        }
+    }
+};
+
+
+
+//}
+
+
+    }};
+
+    var canvas = document.getElementById("mycanvas"); 
+
+    var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
